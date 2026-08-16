@@ -9,4 +9,13 @@ test('front page can be opened', async ({page}) => {
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible();
 })
 
+test('user can log in', async ({page}) => {
+    await page.goto('http://localhost:5173');
+    await page.getByRole('button', {name: 'login'}).click();
+    await page.getByRole('textbox').first().fill('Reagan');
+    await page.getByRole('textbox').last().fill('123456789');
+    await page.getByRole('button', {name: 'login'}).click();
+
+    await expect(page.getByText('Welcome, Luyinda Reagan!')).toBeVisible();
+})
 })
